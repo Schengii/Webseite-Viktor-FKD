@@ -16,47 +16,53 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 
 ## 🚀 Neu implementierte Features & Optimierungen
 
-### 1. Interaktiver Finanzierungsrechner (`FinancingCalculator.tsx`)
+### 1. DSGVO Cookie-Consent-Banner (`CookieBanner.tsx`)
+- Dezentes, modernes Cookie-Banner mit Auswahlmöglichkeit („Alle akzeptieren“, „Nur Notwendige“) und direkter Datenschutzerklärung-Verlinkung.
+- Status wird sicher im `localStorage` gespeichert.
+
+### 2. Scroll-to-Top Navigation (`ScrollToTop.tsx`)
+- Schwebender Button, der nach 400px Scrolltiefe sanft einblendet und Besuchern ein bequemes Zurückspringen an den Seitenanfang ermöglicht.
+
+### 3. PWA Web App Manifest & SVG Favicon (`app/manifest.json`, `app/icon.svg`)
+- Vollständige PWA-Konfiguration für Startbildschirm-Installation auf Smartphones (iOS / Android) sowie gebrandetes SVG Favicon.
+
+### 4. Interaktiver Finanzierungsrechner (`FinancingCalculator.tsx`)
 - Dynamischer Rechner mit Live-Berechnung für Annuitätendarlehen.
 - Schieberegler für **Fahrzeugpreis (5.000 € – 80.000 €)**, **Anzahlung** und Buttons für **Laufzeit (24 – 72 Monate)**.
 - Sofortige Berechnung der monatlichen Wunschrate und Nettodarlehensbetrag mit Übergabe zur Kreditanfrage.
 
-### 2. Standortkarte & Anfahrtsbeschreibung (`LocationMap.tsx`)
+### 5. Standortkarte & Anfahrtsbeschreibung (`LocationMap.tsx`)
 - DSGVO-konforme interaktive **OpenStreetMap-Karte** ohne Third-Party Tracking-Cookies.
 - Direkter Routenplaner-Button für Google Maps sowie vollständige Auflistung aller Kontaktdaten & Öffnungszeiten.
 
-### 3. Zentrale Stammdatenverwaltung (`config/company.ts`)
+### 6. Zentrale Stammdatenverwaltung (`config/company.ts`)
 - Sämtliche Unternehmensdaten (Inhaber, Anschrift, Rufnummern, E-Mail, Öffnungszeiten, Steuer-ID) zentral gebündelt.
 - Wird automatisch und konsistent in Header, Footer, Impressum, Datenschutz, Standortkarte, WhatsApp-Button und SEO-Tags verwendet.
 
-### 4. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
+### 7. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
 - Interaktiver Fahrzeugbestand mit Live-Filter (Top-Angebote, Diesel, Benzin).
 - Detaillierte Fahrzeugkarten mit technischen Daten (Kilometerstand, Erstzulassung, Kraftstoff, Leistung, Preis).
 - Schnellanfrage-CTA für jedes Fahrzeug sowie externe Verlinkung zu Mobile.de & AutoScout24.
 
-### 5. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
+### 8. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
 - Interaktiver Schieberegler (Slider) mit Touch- & Maussteuerung für Fahrzeugaufbereitung & Lackpolitur.
 - Direkte visuelle Demonstration der Aufbereitungsqualität zur Steigerung von Werkstatt- und Pflegebuchungen.
 
-### 6. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
+### 9. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
 - Beim Auswählen von **"Verkauf / Vermittlung"** können Kunden nun bis zu 3 Fotos ihres Fahrzeugs oder des Fahrzeugscheins anhängen.
 - Ermöglicht eine deutlich schnellere und präzisere Vorabbewertung für Viktor.
 
-### 7. Rechtssicherheit & Compliance (Voraussetzung für DE-Veröffentlichung)
+### 10. Rechtssicherheit & Compliance
 - **Rechtskonformes Impressum:** Unter `/impressum` gemäß § 5 DDG mit allen Pflichtangaben, Kontakt und Streitschlichtungshinweis.
 - **Datenschutzerklärung (DSGVO):** Unter `/datenschutz` mit Hinweisen zur Datenerfassung, Kontaktformularen, Server-Logs und Betroffenenrechten.
 
-### 8. Lead-Generierung & Sofortkontakt
+### 11. Lead-Generierung & Sofortkontakt
 - **Voll funktionsfähige API-Route (`/api/contact`):**
   - Echte serverseitige Verarbeitung mit Datenvalidierung und Resend / E-Mail-Vorbereitung.
 - **WhatsApp Quick-Chat (`WhatsAppButton.tsx`):**
   - Schwebender Floating-Button für sofortige Kundenkontakte über Smartphone oder Web-WhatsApp mit vordefinierter Nachricht.
 
-### 9. Vertrauensbildung & Social Proof
-- **Kundenbewertungen & Testimonials (`Testimonials.tsx`):** Echte Referenzen aus Bonn & Umgebung mit 5-Sterne-Badges.
-- **Häufige Fragen (`FAQ.tsx`):** Interaktives Akkordeon für schnelle Klärung offener Fragen (Ablauf, Termine, Kosten).
-
-### 10. Technisches & Lokales SEO
+### 12. Technisches & Lokales SEO
 - **Schema.org Structured Data (`layout.tsx`):** JSON-LD Rich Snippet für `AutoDealer` & `AutoRepair` (Bonn, Rhein-Sieg-Kreis).
 - **OpenGraph & Twitter Cards:** Optimierte Meta-Tags für soziale Netzwerke und Messenger.
 - **`sitemap.ts` & `robots.ts`:** Automatische Generierung von Sitemap und Crawler-Direktiven.
