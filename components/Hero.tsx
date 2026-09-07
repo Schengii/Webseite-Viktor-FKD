@@ -1,9 +1,9 @@
-import { ArrowRight, Car, ShieldCheck, Star, Wrench } from "lucide-react";
+import { ArrowRight, HeartHandshake, MessageCircleHeart, ShieldCheck, Sparkles } from "lucide-react";
 
-const STATS = [
-  { icon: Car, value: "500+", label: "Vermittelte Fahrzeuge" },
-  { icon: Star, value: "4.9/5", label: "Kundenbewertung" },
-  { icon: Wrench, value: "100%", label: "Service aus einer Hand" },
+const PROMISES = [
+  { icon: HeartHandshake, label: "Persönlich betreut vom Inhaber" },
+  { icon: Sparkles, label: "Neu gegründet, volle Aufmerksamkeit für jeden Kunden" },
+  { icon: MessageCircleHeart, label: "Transparente Preise, keine versteckten Kosten" },
 ];
 
 export default function Hero() {
@@ -46,14 +46,14 @@ export default function Hero() {
             </a>
           </div>
 
-          <div className="mt-16 grid grid-cols-3 gap-4 border-t border-white/10 pt-10 sm:gap-8">
-            {STATS.map(({ icon: Icon, value, label }) => (
-              <div key={label} className="flex flex-col items-center gap-2">
-                <Icon className="h-6 w-6 text-accent-light" />
-                <span className="text-2xl font-bold text-white sm:text-3xl">
-                  {value}
-                </span>
-                <span className="text-xs text-white/50 sm:text-sm">{label}</span>
+          <div className="mt-16 grid grid-cols-1 gap-4 border-t border-white/10 pt-10 sm:grid-cols-3 sm:gap-6">
+            {PROMISES.map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-left sm:flex-col sm:text-center sm:gap-2 sm:border-0 sm:bg-transparent sm:px-0 sm:py-0"
+              >
+                <Icon className="h-5 w-5 shrink-0 text-accent-light sm:h-6 sm:w-6" />
+                <span className="text-sm text-white/70 sm:text-xs">{label}</span>
               </div>
             ))}
           </div>

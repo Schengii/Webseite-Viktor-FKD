@@ -7,7 +7,6 @@ import FinancingCalculator from "@/components/FinancingCalculator";
 import WhyUs from "@/components/WhyUs";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
 import LocationMap from "@/components/LocationMap";
-import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
@@ -28,7 +27,6 @@ export default function Home() {
         <WhyUs />
         <BeforeAfterComparison />
         <LocationMap />
-        <Testimonials />
         <FAQ />
         <ContactForm />
       </main>

@@ -16,9 +16,9 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 
 ## 🚀 Neu implementierte Features & Optimierungen
 
-### 1. Qualitäts- & Garantieversprechen (`QualityGuarantees.tsx`)
-- 4-Punkte Vertrauenssiegel: 100-Punkte-Check, 12 Monate Gebrauchtwagengarantie, Meister-Werkstattservice und zertifiziertes Detailing.
-- Direkte Hervorhebung des persönlichen Meister-Kontakts ohne Callcenter-Umwege.
+### 1. Vertrauensversprechen (`QualityGuarantees.tsx`)
+- 4-Punkte Vertrauenssiegel ohne unbelegte Zahlen/Titel: sorgfältige Prüfung, ehrliche Zustandsangaben, persönlicher Draht zum Inhaber, faire individuelle Konditionen.
+- Bewusst ohne konkrete Garantiezeiträume, "Meister"-Bezeichnung oder erfundene Werkstattfotos – das holt der Betrieb erst nach, sobald diese Angaben belegbar sind (z. B. bei Vorliegen eines Meisterbriefs oder einer Garantieversicherung).
 
 ### 2. Deployment-Sicherheit & Vercel-Konfiguration (`vercel.json`)
 - Vordefinierte Sicherheits-Header (`X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`, `Referrer-Policy`) für optimalen Schutz vor Clickjacking und XSS.
@@ -46,10 +46,10 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 - Sämtliche Unternehmensdaten (Inhaber, Anschrift, Rufnummern, E-Mail, Öffnungszeiten, Steuer-ID) zentral gebündelt.
 - Wird automatisch und konsistent in Header, Footer, Impressum, Datenschutz, Standortkarte, WhatsApp-Button und SEO-Tags verwendet.
 
-### 9. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
-- Interaktiver Fahrzeugbestand mit Live-Filter (Top-Angebote, Diesel, Benzin).
-- Detaillierte Fahrzeugkarten mit technischen Daten (Kilometerstand, Erstzulassung, Kraftstoff, Leistung, Preis).
-- Schnellanfrage-CTA für jedes Fahrzeug sowie externe Verlinkung zu Mobile.de & AutoScout24.
+### 9. Fahrzeugbestand-Sektion (`VehicleInventory.tsx`)
+- Ehrlicher Platzhalter statt erfundener Fahrzeugangebote: kommuniziert offen, dass der Bestand als neu gegründeter Betrieb noch aufgebaut wird.
+- CTA zur individuellen Fahrzeugsuche sowie Verlinkung zu Mobile.de für die Übergangszeit.
+- **Sobald reale Fahrzeuge im Bestand sind:** `Vehicle`-Typ und Karten-UI aus der Git-Historie (`git show edd9004:components/VehicleInventory.tsx`) können als Vorlage für echte Daten/Fotos wiederverwendet werden.
 
 ### 10. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
 - Interaktiver Schieberegler (Slider) mit Touch- & Maussteuerung für Fahrzeugaufbereitung & Lackpolitur.
@@ -105,12 +105,29 @@ npm run start
 ## ⚙️ Konfiguration & Umgebungsvariablen (`.env.local`)
 
 Unternehmensdaten können einfach in `config/company.ts` gepflegt werden.
-Für den produktiven E-Mail-Versand und Live-Domain können folgende Variablen in einer `.env.local`-Datei hinterlegt werden:
+
+> ⚠️ **Wichtig vor dem Livegang:** Ohne `RESEND_API_KEY` kann das Anfrageformular
+> keine E-Mails verschicken. Besucher sehen dann bewusst eine Fehlermeldung
+> ("Bitte kontaktieren Sie uns direkt telefonisch") statt einer falschen
+> Erfolgsmeldung — es gehen also keine Anfragen unbemerkt verloren, aber das
+> Formular ist ohne diesen Schlüssel faktisch nicht nutzbar. Vor dem Livegang
+> unbedingt folgende Variablen in `.env.local` (lokal) bzw. in den
+> Vercel-Projekteinstellungen (Produktion) hinterlegen:
 
 ```env
-# Optional für automatischen E-Mail-Versand via Resend
+# Erforderlich, damit Formularanfragen tatsächlich als E-Mail ankommen.
+# Kostenloser Account unter https://resend.com – anschließend die eigene
+# Domain dort verifizieren (sonst kann nur an die eigene Account-E-Mail
+# gesendet werden).
 RESEND_API_KEY=dein_resend_api_key
+
+# An welche Adresse neue Anfragen zugestellt werden
 CONTACT_RECEIVER_EMAIL=info@fkd-fahrzeuge.de
+
+# Absenderadresse – muss zu einer bei Resend verifizierten Domain gehören,
+# sonst lehnt Resend den Versand ab (der Platzhalter onboarding@resend.dev
+# funktioniert nur im Test-Modus an die eigene Account-E-Mail)
+CONTACT_SENDER_EMAIL=anfrage@deine-domain.de
 
 # Eigene Domain für sitemap.xml & Schema.org
 NEXT_PUBLIC_SITE_URL=https://fkd-fahrzeuge.de
