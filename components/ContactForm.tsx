@@ -8,6 +8,7 @@ import {
   Search,
   Sparkles,
   Send,
+  AlertCircle,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -41,20 +42,48 @@ const CONCERNS: ConcernOption[] = [
   },
 ];
 
-type FormStatus = "idle" | "submitting" | "success";
+type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
   const [concern, setConcern] = useState<Concern>("suche");
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("submitting");
+    setErrorMessage("");
 
-    // TODO: An echten Endpunkt / CRM anbinden (z.B. API-Route, E-Mail-Service).
-    window.setTimeout(() => {
-      setStatus("success");
-    }, 900);
+    const formData = new FormData(event.currentTarget);
+    const data: Record<string, string> = {
+      concern,
+    };
+
+    formData.forEach((value, key) => {
+      data[key] = value.toString();
+    });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus("success");
+      } else {
+        setErrorMessage(result.error || "Etwas ist schiefgelaufen. Bitte rufen Sie uns direkt an.");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMessage("Verbindungsfehler. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -92,6 +121,13 @@ export default function ContactForm() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-8">
+              {status === "error" && (
+                <div className="flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400">
+                  <AlertCircle className="h-5 w-5 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
+
               {/* Anliegen-Auswahl */}
               <div>
                 <label className="mb-4 block text-sm font-semibold text-white">
@@ -136,21 +172,21 @@ export default function ContactForm() {
                     required
                     type="text"
                     name="name"
-                    placeholder="Vor- und Nachname"
+                    placeholder="Vor- und Nachname *"
                     className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                   />
                   <input
                     required
                     type="tel"
                     name="phone"
-                    placeholder="Telefonnummer"
+                    placeholder="Telefonnummer *"
                     className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                   />
                   <input
                     required
                     type="email"
                     name="email"
-                    placeholder="E-Mail-Adresse"
+                    placeholder="E-Mail-Adresse *"
                     className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent sm:col-span-2"
                   />
                 </div>
@@ -167,7 +203,7 @@ export default function ContactForm() {
                     <input
                       type="text"
                       name="wunschmodell"
-                      placeholder="Wunschmodell / Marke"
+                      placeholder="Wunschmodell / Marke (z. B. VW Golf, BMW 3er)"
                       className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                     />
                     <input
@@ -184,13 +220,13 @@ export default function ContactForm() {
                     <input
                       type="text"
                       name="fahrzeugmodell"
-                      placeholder="Fahrzeugmodell"
+                      placeholder="Fahrzeugmodell & Erstzulassung"
                       className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                     />
                     <input
                       type="text"
                       name="baujahr"
-                      placeholder="Baujahr & Kilometerstand"
+                      placeholder="Kilometerstand & Preisvorstellung"
                       className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                     />
                   </div>
@@ -201,7 +237,7 @@ export default function ContactForm() {
                     <input
                       type="text"
                       name="serviceart"
-                      placeholder="Art der Leistung (z.B. Innenreinigung)"
+                      placeholder="Art der Leistung (z.B. Innenreinigung, Politur, Bremsen)"
                       className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                     />
                     <input
@@ -216,7 +252,7 @@ export default function ContactForm() {
                 <textarea
                   name="message"
                   rows={4}
-                  placeholder="Weitere Angaben zu Ihrem Anliegen..."
+                  placeholder="Weitere Angaben zu Ihrem Anliegen oder Fahrzeug..."
                   className="mt-4 w-full rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
                 />
               </div>
@@ -240,7 +276,7 @@ export default function ContactForm() {
               </button>
               <p className="text-center text-xs text-white/40">
                 Mit dem Absenden stimmen Sie unserer{" "}
-                <a href="#" className="underline hover:text-white/60">
+                <a href="/datenschutz" className="underline hover:text-white/60">
                   Datenschutzerklärung
                 </a>{" "}
                 zu.

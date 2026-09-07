@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { Car, Menu, X, Phone } from "lucide-react";
 
 const NAV_LINKS = [
-  { href: "#leistungen", label: "Leistungen" },
-  { href: "#vorteile", label: "Vorteile" },
-  { href: "#anfrage", label: "Anfrage" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#vorteile", label: "Vorteile" },
+  { href: "/#anfrage", label: "Anfrage" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 export default function Header() {
@@ -30,24 +31,24 @@ export default function Header() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-        <a href="#top" className="flex items-center gap-2 text-white">
+        <Link href="/" className="flex items-center gap-2 text-white">
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent">
             <Car className="h-5 w-5 text-white" />
           </span>
           <span className="text-lg font-bold tracking-tight">
             FKD <span className="text-accent-light">Fahrzeuge</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm font-medium text-white/70 transition-colors hover:text-white"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -59,9 +60,9 @@ export default function Header() {
             <Phone className="h-4 w-4" />
             0228 / 000 00 00
           </a>
-          <a href="#anfrage" className="btn-primary !px-5 !py-2.5 text-sm">
+          <Link href="/#anfrage" className="btn-primary !px-5 !py-2.5 text-sm">
             Anfrage starten
-          </a>
+          </Link>
         </div>
 
         <button
@@ -78,22 +79,22 @@ export default function Header() {
         <div className="border-t border-white/10 bg-anthracite-950/95 px-4 pb-6 pt-4 backdrop-blur-lg md:hidden">
           <nav className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="rounded-lg px-3 py-3 text-base font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#anfrage"
+            <Link
+              href="/#anfrage"
               onClick={() => setMenuOpen(false)}
               className="btn-primary mt-3 w-full"
             >
               Anfrage starten
-            </a>
+            </Link>
           </nav>
         </div>
       )}
