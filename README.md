@@ -7,7 +7,7 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 ## 🌟 Leistungsübersicht
 - **An- & Verkauf:** Faire Bewertung, geprüfter Fahrzeugbestand und unkomplizierte Bar-/Überweisungsabwicklung.
 - **Fahrzeugaufbereitung:** Professionelle Innen- und Außenaufbereitung, Lackpolitur & Keramikversiegelung.
-- **Finanzierungsvermittlung:** Passgenaue Raten & Konditionen über Partnerbanken.
+- **Finanzierungsvermittlung & Rechner:** Passgenaue Raten & Konditionen über Partnerbanken mit individuellem Online-Rechner.
 - **Individuelle Fahrzeugsuche:** Bundesweite Recherche und Qualitätscheck nach Kundenwunsch.
 - **Fahrzeugvermittlung:** Provisionsbasierte und sichere Vermittlung von Privat an Privat/Händler.
 - **Service & Reparaturen:** Schneller Werkstattservice & Wartung aus einer Hand.
@@ -16,36 +16,47 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 
 ## 🚀 Neu implementierte Features & Optimierungen
 
-### 1. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
+### 1. Interaktiver Finanzierungsrechner (`FinancingCalculator.tsx`)
+- Dynamischer Rechner mit Live-Berechnung für Annuitätendarlehen.
+- Schieberegler für **Fahrzeugpreis (5.000 € – 80.000 €)**, **Anzahlung** und Buttons für **Laufzeit (24 – 72 Monate)**.
+- Sofortige Berechnung der monatlichen Wunschrate und Nettodarlehensbetrag mit Übergabe zur Kreditanfrage.
+
+### 2. Standortkarte & Anfahrtsbeschreibung (`LocationMap.tsx`)
+- DSGVO-konforme interaktive **OpenStreetMap-Karte** ohne Third-Party Tracking-Cookies.
+- Direkter Routenplaner-Button für Google Maps sowie vollständige Auflistung aller Kontaktdaten & Öffnungszeiten.
+
+### 3. Zentrale Stammdatenverwaltung (`config/company.ts`)
+- Sämtliche Unternehmensdaten (Inhaber, Anschrift, Rufnummern, E-Mail, Öffnungszeiten, Steuer-ID) zentral gebündelt.
+- Wird automatisch und konsistent in Header, Footer, Impressum, Datenschutz, Standortkarte, WhatsApp-Button und SEO-Tags verwendet.
+
+### 4. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
 - Interaktiver Fahrzeugbestand mit Live-Filter (Top-Angebote, Diesel, Benzin).
 - Detaillierte Fahrzeugkarten mit technischen Daten (Kilometerstand, Erstzulassung, Kraftstoff, Leistung, Preis).
 - Schnellanfrage-CTA für jedes Fahrzeug sowie externe Verlinkung zu Mobile.de & AutoScout24.
 
-### 2. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
+### 5. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
 - Interaktiver Schieberegler (Slider) mit Touch- & Maussteuerung für Fahrzeugaufbereitung & Lackpolitur.
 - Direkte visuelle Demonstration der Aufbereitungsqualität zur Steigerung von Werkstatt- und Pflegebuchungen.
 
-### 3. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
+### 6. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
 - Beim Auswählen von **"Verkauf / Vermittlung"** können Kunden nun bis zu 3 Fotos ihres Fahrzeugs oder des Fahrzeugscheins anhängen.
 - Ermöglicht eine deutlich schnellere und präzisere Vorabbewertung für Viktor.
 
-### 4. Rechtssicherheit & Compliance (Voraussetzung für DE-Veröffentlichung)
+### 7. Rechtssicherheit & Compliance (Voraussetzung für DE-Veröffentlichung)
 - **Rechtskonformes Impressum:** Unter `/impressum` gemäß § 5 DDG mit allen Pflichtangaben, Kontakt und Streitschlichtungshinweis.
-- **Datenschutzerklärung (DSGVO):** Unter `/datenschutz` mit detaillierten Hinweisen zur Datenerfassung, Kontaktformularen, Server-Logs und Betroffenenrechten.
-- **Rechtssicherer Footer:** Saubere Verlinkung ohne tote Anker-Links.
+- **Datenschutzerklärung (DSGVO):** Unter `/datenschutz` mit Hinweisen zur Datenerfassung, Kontaktformularen, Server-Logs und Betroffenenrechten.
 
-### 5. Lead-Generierung & Sofortkontakt
+### 8. Lead-Generierung & Sofortkontakt
 - **Voll funktionsfähige API-Route (`/api/contact`):**
-  - Echte serverseitige Verarbeitung mit Datenvalidierung.
-  - Vorbereitet für direkten E-Mail-Versand (z. B. via Resend API oder SMTP) mit Fallback auf Server-Logging.
+  - Echte serverseitige Verarbeitung mit Datenvalidierung und Resend / E-Mail-Vorbereitung.
 - **WhatsApp Quick-Chat (`WhatsAppButton.tsx`):**
   - Schwebender Floating-Button für sofortige Kundenkontakte über Smartphone oder Web-WhatsApp mit vordefinierter Nachricht.
 
-### 6. Vertrauensbildung & Social Proof
+### 9. Vertrauensbildung & Social Proof
 - **Kundenbewertungen & Testimonials (`Testimonials.tsx`):** Echte Referenzen aus Bonn & Umgebung mit 5-Sterne-Badges.
 - **Häufige Fragen (`FAQ.tsx`):** Interaktives Akkordeon für schnelle Klärung offener Fragen (Ablauf, Termine, Kosten).
 
-### 7. Technisches & Lokales SEO
+### 10. Technisches & Lokales SEO
 - **Schema.org Structured Data (`layout.tsx`):** JSON-LD Rich Snippet für `AutoDealer` & `AutoRepair` (Bonn, Rhein-Sieg-Kreis).
 - **OpenGraph & Twitter Cards:** Optimierte Meta-Tags für soziale Netzwerke und Messenger.
 - **`sitemap.ts` & `robots.ts`:** Automatische Generierung von Sitemap und Crawler-Direktiven.
@@ -80,9 +91,10 @@ npm run start
 
 ---
 
-## ⚙️ Umgebungsvariablen (`.env.local`)
+## ⚙️ Konfiguration & Umgebungsvariablen (`.env.local`)
 
-Für den produktiven E-Mail-Versand können folgende Variablen in einer `.env.local`-Datei hinterlegt werden:
+Unternehmensdaten können einfach in `config/company.ts` gepflegt werden.
+Für den produktiven E-Mail-Versand und Live-Domain können folgende Variablen in einer `.env.local`-Datei hinterlegt werden:
 
 ```env
 # Optional für automatischen E-Mail-Versand via Resend

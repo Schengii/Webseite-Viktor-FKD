@@ -1,18 +1,13 @@
 import Link from "next/link";
-import { Car, Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
-
-const OPENING_HOURS = [
-  { day: "Montag – Freitag", hours: "09:00 – 18:00 Uhr" },
-  { day: "Samstag", hours: "10:00 – 14:00 Uhr" },
-  { day: "Sonntag", hours: "Geschlossen (Termine n. V.)" },
-];
+import { Car, Clock, Facebook, Instagram, Mail, MapPin, Phone, ExternalLink } from "lucide-react";
+import { COMPANY_CONFIG } from "@/config/company";
 
 const SERVICE_LINKS = [
   { name: "An- & Verkauf", href: "#leistungen" },
+  { name: "Fahrzeugbestand", href: "#fahrzeuge" },
   { name: "Fahrzeugaufbereitung", href: "#leistungen" },
-  { name: "Finanzierungsvermittlung", href: "#leistungen" },
+  { name: "Finanzierungsrechner", href: "#finanzierung" },
   { name: "Individuelle Fahrzeugsuche", href: "#leistungen" },
-  { name: "Fahrzeugvermittlung", href: "#leistungen" },
   { name: "Service & Reparaturen", href: "#leistungen" },
 ];
 
@@ -60,7 +55,7 @@ export default function Footer() {
           {/* Leistungen */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
-              Leistungen
+              Navigation & Service
             </h3>
             <ul className="mt-4 space-y-3">
               {SERVICE_LINKS.map((service) => (
@@ -85,20 +80,31 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent-light" />
                 <span>
-                  Musterstraße 12<br />
-                  53111 Bonn
+                  {COMPANY_CONFIG.street}<br />
+                  {COMPANY_CONFIG.zip} {COMPANY_CONFIG.city}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 shrink-0 text-accent-light" />
-                <a href="tel:+4900000000" className="hover:text-white transition-colors">
-                  0228 / 000 00 00
+                <a href={`tel:${COMPANY_CONFIG.phoneRaw}`} className="hover:text-white transition-colors">
+                  {COMPANY_CONFIG.phone}
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-4 w-4 shrink-0 text-accent-light" />
-                <a href="mailto:info@fkd-fahrzeuge.de" className="hover:text-white transition-colors">
-                  info@fkd-fahrzeuge.de
+                <a href={`mailto:${COMPANY_CONFIG.email}`} className="hover:text-white transition-colors">
+                  {COMPANY_CONFIG.email}
+                </a>
+              </li>
+              <li className="pt-2">
+                <a
+                  href={COMPANY_CONFIG.googleMapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-accent-light hover:underline"
+                >
+                  Anfahrt auf Google Maps
+                  <ExternalLink className="h-3 w-3" />
                 </a>
               </li>
             </ul>
@@ -110,7 +116,7 @@ export default function Footer() {
               Öffnungszeiten
             </h3>
             <ul className="mt-4 space-y-3 text-sm text-white/50">
-              {OPENING_HOURS.map(({ day, hours }) => (
+              {COMPANY_CONFIG.openingHours.map(({ day, hours }) => (
                 <li key={day} className="flex items-center justify-between gap-4">
                   <span className="flex items-center gap-2">
                     <Clock className="h-4 w-4 shrink-0 text-accent-light" />
@@ -124,7 +130,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/40 sm:flex-row">
-          <p>© {new Date().getFullYear()} FKD Fahrzeuge Bonn. Alle Rechte vorbehalten.</p>
+          <p>© {new Date().getFullYear()} {COMPANY_CONFIG.name} Bonn. Alle Rechte vorbehalten.</p>
           <div className="flex gap-6">
             <Link href="/impressum" className="hover:text-white/80 transition-colors">
               Impressum

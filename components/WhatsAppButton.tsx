@@ -1,13 +1,13 @@
 "use client";
 
 import { MessageCircle } from "lucide-react";
+import { COMPANY_CONFIG } from "@/config/company";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "4915000000000"; // Handynummer im internationalen Format
   const message = encodeURIComponent(
     "Hallo FKD Fahrzeuge! Ich interessiere mich für Ihre Leistungen und möchte gerne eine unverbindliche Anfrage stellen."
   );
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  const whatsappUrl = `https://wa.me/${COMPANY_CONFIG.whatsappNumber}?text=${message}`;
 
   return (
     <a

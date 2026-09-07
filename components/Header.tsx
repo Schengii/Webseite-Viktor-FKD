@@ -3,10 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Car, Menu, X, Phone } from "lucide-react";
+import { COMPANY_CONFIG } from "@/config/company";
 
 const NAV_LINKS = [
   { href: "/#leistungen", label: "Leistungen" },
-  { href: "/#fahrzeuge", label: "Fahrzeugbestand" },
+  { href: "/#fahrzeuge", label: "Fahrzeuge" },
+  { href: "/#finanzierung", label: "Finanzierung" },
   { href: "/#vorteile", label: "Vorteile" },
   { href: "/#anfrage", label: "Anfrage" },
   { href: "/#kontakt", label: "Kontakt" },
@@ -41,7 +43,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-6 lg:gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -55,11 +57,11 @@ export default function Header() {
 
         <div className="hidden items-center gap-4 md:flex">
           <a
-            href="tel:+4900000000"
+            href={`tel:${COMPANY_CONFIG.phoneRaw}`}
             className="flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
           >
-            <Phone className="h-4 w-4" />
-            0228 / 000 00 00
+            <Phone className="h-4 w-4 text-accent-light" />
+            {COMPANY_CONFIG.phone}
           </a>
           <Link href="/#anfrage" className="btn-primary !px-5 !py-2.5 text-sm">
             Anfrage starten
@@ -89,10 +91,17 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={`tel:${COMPANY_CONFIG.phoneRaw}`}
+              className="flex items-center gap-2 px-3 py-3 text-sm font-medium text-white/80"
+            >
+              <Phone className="h-4 w-4 text-accent-light" />
+              {COMPANY_CONFIG.phone}
+            </a>
             <Link
               href="/#anfrage"
               onClick={() => setMenuOpen(false)}
-              className="btn-primary mt-3 w-full"
+              className="btn-primary mt-2 w-full"
             >
               Anfrage starten
             </Link>

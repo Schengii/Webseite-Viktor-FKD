@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Lock } from "lucide-react";
 import type { Metadata } from "next";
+import { COMPANY_CONFIG } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Datenschutzerklärung | FKD Fahrzeughandel & Autoservice Bonn",
@@ -42,42 +43,32 @@ export default function DatenschutzPage() {
             <h2 className="text-xl font-bold text-white mb-2">2. Verantwortliche Stelle</h2>
             <p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p>
             <p className="mt-2 font-medium text-white">
-              FKD Fahrzeughandel & Autoservice<br />
-              Viktor FKD<br />
-              Musterstraße 12<br />
-              53111 Bonn<br />
-              Telefon: 0228 / 000 00 00<br />
-              E-Mail: info@fkd-fahrzeuge.de
+              {COMPANY_CONFIG.legalName}<br />
+              {COMPANY_CONFIG.street}<br />
+              {COMPANY_CONFIG.zip} {COMPANY_CONFIG.city}<br />
+              Telefon: {COMPANY_CONFIG.phone}<br />
+              E-Mail: {COMPANY_CONFIG.email}
             </p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-white mb-2">3. Datenerfassung auf dieser Website</h2>
             
-            <h3 className="text-lg font-semibold text-white mt-4 mb-2">Kontakt- und Anfrageformular</h3>
+            <h3 className="text-lg font-semibold text-white mt-4 mb-2">Kontakt- und Anfrageformular & Bild-Upload</h3>
             <p className="text-sm text-white/70">
-              Wenn Sie uns per Kontaktformular Anfragen (z.B. Fahrzeugsuche, Fahrzeugverkauf, Serviceauftrag) zukommen lassen,
-              werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks
-              Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht
-              ohne Ihre Einwilligung weiter. Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO,
-              sofern Ihre Anfrage mit der Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen
-              erforderlich ist. In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der
-              effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO).
+              Wenn Sie uns per Kontaktformular Anfragen (z.B. Fahrzeugsuche, Fahrzeugverkauf, Serviceauftrag) zukommen lassen
+              und ggf. Fahrzeugfotos oder Dokumente anhängen, werden Ihre Angaben aus dem Anfrageformular inklusive der von
+              Ihnen dort angegebenen Kontaktdaten und Dateinamen zwecks Bearbeitung der Anfrage und für den Fall von
+              Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+              Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage mit der
+              Erfüllung eines Vertrags zusammenhängt oder zur Durchführung vorvertraglicher Maßnahmen erforderlich ist.
             </p>
 
             <h3 className="text-lg font-semibold text-white mt-4 mb-2">Server-Log-Dateien</h3>
             <p className="text-sm text-white/70">
               Der Provider der Seiten erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die
-              Ihr Browser automatisch an uns übermittelt. Dies sind:
+              Ihr Browser automatisch an uns übermittelt (Browsertyp, Version, Betriebssystem, Referrer URL, Zeitstempel, IP-Adresse).
             </p>
-            <ul className="list-disc list-inside text-sm text-white/60 mt-2 space-y-1">
-              <li>Browsertyp und Browserversion</li>
-              <li>Verwendetes Betriebssystem</li>
-              <li>Referrer URL</li>
-              <li>Hostname des zugreifenden Rechners</li>
-              <li>Uhrzeit der Serveranfrage</li>
-              <li>IP-Adresse</li>
-            </ul>
           </section>
 
           <section>
@@ -86,8 +77,7 @@ export default function DatenschutzPage() {
               Sie haben jederzeit das Recht, unentgeltlich Auskunft über Herkunft, Empfänger und Zweck Ihrer gespeicherten
               personenbezogenen Daten zu erhalten. Sie haben außerdem ein Recht, die Berichtigung oder Löschung dieser Daten zu
               verlangen. Hierzu sowie zu weiteren Fragen zum Thema Datenschutz können Sie sich jederzeit unter der im
-              Impressum angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen ein Beschwerderecht bei der zuständigen
-              Aufsichtsbehörde zu.
+              Impressum angegebenen Adresse an uns wenden.
             </p>
           </section>
 
@@ -95,9 +85,7 @@ export default function DatenschutzPage() {
             <h2 className="text-xl font-bold text-white mb-2">5. SSL- bzw. TLS-Verschlüsselung</h2>
             <p className="text-sm text-white/70">
               Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel
-              Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine
-              verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“
-              wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.
+              Bestellungen oder Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung.
             </p>
           </section>
         </div>

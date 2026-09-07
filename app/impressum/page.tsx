@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Shield } from "lucide-react";
 import type { Metadata } from "next";
+import { COMPANY_CONFIG } from "@/config/company";
 
 export const metadata: Metadata = {
   title: "Impressum | FKD Fahrzeughandel & Autoservice Bonn",
@@ -29,18 +30,18 @@ export default function ImpressumPage() {
         <div className="space-y-8 text-white/80 leading-relaxed rounded-2xl border border-white/10 bg-anthracite-900/60 p-6 sm:p-10">
           <section>
             <h2 className="text-xl font-bold text-white mb-2">Angaben gemäß § 5 DDG</h2>
-            <p className="font-semibold text-white">FKD Fahrzeughandel & Autoservice</p>
-            <p>Inhaber: Viktor FKD</p>
-            <p>Musterstraße 12</p>
-            <p>53111 Bonn</p>
-            <p>Deutschland</p>
+            <p className="font-semibold text-white">{COMPANY_CONFIG.legalName}</p>
+            <p>Inhaber: {COMPANY_CONFIG.owner}</p>
+            <p>{COMPANY_CONFIG.street}</p>
+            <p>{COMPANY_CONFIG.zip} {COMPANY_CONFIG.city}</p>
+            <p>{COMPANY_CONFIG.country}</p>
           </section>
 
           <section>
             <h2 className="text-xl font-bold text-white mb-2">Kontakt</h2>
-            <p>Telefon: 0228 / 000 00 00</p>
-            <p>E-Mail: info@fkd-fahrzeuge.de</p>
-            <p>Webseite: www.fkd-fahrzeuge.de</p>
+            <p>Telefon: {COMPANY_CONFIG.phone}</p>
+            <p>E-Mail: {COMPANY_CONFIG.email}</p>
+            <p>Webseite: {COMPANY_CONFIG.website}</p>
           </section>
 
           <section>
@@ -48,7 +49,7 @@ export default function ImpressumPage() {
             <p>
               Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
               <br />
-              <span className="text-white/50 text-sm">DE (wird bei Gewerbeanmeldung nachgetragen / USt-IdNr.)</span>
+              <span className="text-white/70">{COMPANY_CONFIG.ustId}</span>
             </p>
           </section>
 

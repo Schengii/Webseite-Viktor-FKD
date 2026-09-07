@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { COMPANY_CONFIG } from "@/config/company";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -8,7 +9,7 @@ const inter = Inter({
   display: "swap",
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fkd-fahrzeuge.de";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || COMPANY_CONFIG.website;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -24,14 +25,15 @@ export const metadata: Metadata = {
     "Gebrauchtwagen Ankauf Bonn",
     "Fahrzeugaufbereitung Bonn",
     "Autopflege Bonn",
+    "Finanzierung Gebrauchtwagen Bonn",
     "Fahrzeugsuche Deutschland",
     "Autoservice Bonn",
     "Kfz Reparatur Bonn",
     "Autovermittlung",
   ],
-  authors: [{ name: "FKD Fahrzeughandel & Autoservice" }],
-  creator: "FKD Fahrzeuge",
-  publisher: "FKD Fahrzeuge Bonn",
+  authors: [{ name: COMPANY_CONFIG.name }],
+  creator: COMPANY_CONFIG.name,
+  publisher: COMPANY_CONFIG.name,
   formatDetection: {
     email: true,
     address: true,
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
     description:
       "An- & Verkauf, Aufbereitung, Finanzierung, Fahrzeugsuche & Service – alles aus einer Hand in Bonn und dem Rhein-Sieg-Kreis.",
     url: siteUrl,
-    siteName: "FKD Fahrzeuge",
+    siteName: COMPANY_CONFIG.name,
     locale: "de_DE",
     type: "website",
   },
@@ -74,18 +76,18 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": ["AutoDealer", "AutoRepair"],
-    "name": "FKD Fahrzeughandel & Autoservice Bonn",
+    "name": COMPANY_CONFIG.legalName,
     "image": `${siteUrl}/og-image.jpg`,
     "description":
       "An- & Verkauf, Fahrzeugaufbereitung, Finanzierung, individuelle Fahrzeugsuche und Service in Bonn.",
-    "telephone": "+492280000000",
-    "email": "info@fkd-fahrzeuge.de",
+    "telephone": COMPANY_CONFIG.phoneRaw,
+    "email": COMPANY_CONFIG.email,
     "url": siteUrl,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Musterstraße 12",
-      "addressLocality": "Bonn",
-      "postalCode": "53111",
+      "streetAddress": COMPANY_CONFIG.street,
+      "addressLocality": COMPANY_CONFIG.city,
+      "postalCode": COMPANY_CONFIG.zip,
       "addressCountry": "DE",
     },
     "geo": {

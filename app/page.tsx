@@ -2,8 +2,10 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import VehicleInventory from "@/components/VehicleInventory";
+import FinancingCalculator from "@/components/FinancingCalculator";
 import WhyUs from "@/components/WhyUs";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
+import LocationMap from "@/components/LocationMap";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import ContactForm from "@/components/ContactForm";
@@ -18,8 +20,10 @@ export default function Home() {
         <Hero />
         <Services />
         <VehicleInventory />
+        <FinancingCalculator />
         <WhyUs />
         <BeforeAfterComparison />
+        <LocationMap />
         <Testimonials />
         <FAQ />
         <ContactForm />
