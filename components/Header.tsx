@@ -6,6 +6,7 @@ import { Car, Menu, X, Phone } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#fahrzeuge", label: "Fahrzeugbestand" },
   { href: "/#vorteile", label: "Vorteile" },
   { href: "/#anfrage", label: "Anfrage" },
   { href: "/#kontakt", label: "Kontakt" },

@@ -5,8 +5,8 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 ---
 
 ## 🌟 Leistungsübersicht
-- **An- & Verkauf:** Faire Bewertung und geprüfter Fahrzeugbestand.
-- **Fahrzeugaufbereitung:** Professionelle Innen- und Außenaufbereitung, Lackpolitur & Versiegelung.
+- **An- & Verkauf:** Faire Bewertung, geprüfter Fahrzeugbestand und unkomplizierte Bar-/Überweisungsabwicklung.
+- **Fahrzeugaufbereitung:** Professionelle Innen- und Außenaufbereitung, Lackpolitur & Keramikversiegelung.
 - **Finanzierungsvermittlung:** Passgenaue Raten & Konditionen über Partnerbanken.
 - **Individuelle Fahrzeugsuche:** Bundesweite Recherche und Qualitätscheck nach Kundenwunsch.
 - **Fahrzeugvermittlung:** Provisionsbasierte und sichere Vermittlung von Privat an Privat/Händler.
@@ -16,32 +16,39 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 
 ## 🚀 Neu implementierte Features & Optimierungen
 
-### 1. Rechtssicherheit & Compliance (Voraussetzung für Veröffentlichung)
-- **Rechtskonformes Impressum:** Unter `/impressum` gemäß § 5 DDG (ehem. TMG) mit allen Pflichtangaben, Kontakt und Streitschlichtungshinweis.
+### 1. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
+- Interaktiver Fahrzeugbestand mit Live-Filter (Top-Angebote, Diesel, Benzin).
+- Detaillierte Fahrzeugkarten mit technischen Daten (Kilometerstand, Erstzulassung, Kraftstoff, Leistung, Preis).
+- Schnellanfrage-CTA für jedes Fahrzeug sowie externe Verlinkung zu Mobile.de & AutoScout24.
+
+### 2. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
+- Interaktiver Schieberegler (Slider) mit Touch- & Maussteuerung für Fahrzeugaufbereitung & Lackpolitur.
+- Direkte visuelle Demonstration der Aufbereitungsqualität zur Steigerung von Werkstatt- und Pflegebuchungen.
+
+### 3. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
+- Beim Auswählen von **"Verkauf / Vermittlung"** können Kunden nun bis zu 3 Fotos ihres Fahrzeugs oder des Fahrzeugscheins anhängen.
+- Ermöglicht eine deutlich schnellere und präzisere Vorabbewertung für Viktor.
+
+### 4. Rechtssicherheit & Compliance (Voraussetzung für DE-Veröffentlichung)
+- **Rechtskonformes Impressum:** Unter `/impressum` gemäß § 5 DDG mit allen Pflichtangaben, Kontakt und Streitschlichtungshinweis.
 - **Datenschutzerklärung (DSGVO):** Unter `/datenschutz` mit detaillierten Hinweisen zur Datenerfassung, Kontaktformularen, Server-Logs und Betroffenenrechten.
 - **Rechtssicherer Footer:** Saubere Verlinkung ohne tote Anker-Links.
 
-### 2. Lead-Generierung & Interaktion
+### 5. Lead-Generierung & Sofortkontakt
 - **Voll funktionsfähige API-Route (`/api/contact`):**
   - Echte serverseitige Verarbeitung mit Datenvalidierung.
   - Vorbereitet für direkten E-Mail-Versand (z. B. via Resend API oder SMTP) mit Fallback auf Server-Logging.
-- **Interaktives Anfrageformular (`ContactForm.tsx`):**
-  - Live Status-Feedback (Ladeanimation, Erfolgsmeldung, Fehlerbenachrichtigung).
-  - Dynamische Formularfelder abgestimmt auf Suche, Ankauf oder Werkstatt/Aufbereitung.
 - **WhatsApp Quick-Chat (`WhatsAppButton.tsx`):**
   - Schwebender Floating-Button für sofortige Kundenkontakte über Smartphone oder Web-WhatsApp mit vordefinierter Nachricht.
 
-### 3. Vertrauensbildung & Social Proof
-- **Kundenbewertungen & Testimonials (`Testimonials.tsx`):**
-  - Echte Referenzen aus Bonn & Umgebung mit 5-Sterne-Badges zur Steigerung der Abschlussquote.
-- **Häufige Fragen (`FAQ.tsx`):**
-  - Interaktives Akkordeon mit den wichtigsten Fragen zu Ablauf, Finanzierung, Kosten und Terminen.
+### 6. Vertrauensbildung & Social Proof
+- **Kundenbewertungen & Testimonials (`Testimonials.tsx`):** Echte Referenzen aus Bonn & Umgebung mit 5-Sterne-Badges.
+- **Häufige Fragen (`FAQ.tsx`):** Interaktives Akkordeon für schnelle Klärung offener Fragen (Ablauf, Termine, Kosten).
 
-### 4. Technisches & Lokales SEO (Search Engine Optimization)
-- **Schema.org Structured Data:**
-  - JSON-LD Rich Snippet für `AutoDealer` & `AutoRepair` für eine verbesserte Platzierung in den lokalen Google Maps & Search-Ergebnissen (Bonn & Rhein-Sieg-Kreis).
-- **OpenGraph & Twitter Cards:** Optimierte Meta-Tags für ansprechende Vorschaubilder beim Teilen auf WhatsApp, Facebook oder LinkedIn.
-- **`sitemap.ts` & `robots.ts`:** Automatische Generierung von Sitemap und Crawler-Richtlinien für Suchmaschinen.
+### 7. Technisches & Lokales SEO
+- **Schema.org Structured Data (`layout.tsx`):** JSON-LD Rich Snippet für `AutoDealer` & `AutoRepair` (Bonn, Rhein-Sieg-Kreis).
+- **OpenGraph & Twitter Cards:** Optimierte Meta-Tags für soziale Netzwerke und Messenger.
+- **`sitemap.ts` & `robots.ts`:** Automatische Generierung von Sitemap und Crawler-Direktiven.
 
 ---
 
@@ -65,7 +72,7 @@ npm run dev
 
 Die Anwendung ist standardmäßig unter [http://localhost:3000](http://localhost:3000) erreichbar.
 
-### Produktions-Build erstellen & prüfen:
+### Produktions-Build erstellen:
 ```bash
 npm run build
 npm run start

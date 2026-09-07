@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useRef, type FormEvent, type ChangeEvent } from "react";
 import {
   CheckCircle2,
   Handshake,
@@ -9,6 +9,8 @@ import {
   Sparkles,
   Send,
   AlertCircle,
+  Upload,
+  X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -48,6 +50,24 @@ export default function ContactForm() {
   const [concern, setConcern] = useState<Concern>("suche");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const filesArr = Array.from(e.target.files);
+      // Dateinamen speichern
+      const names = filesArr.slice(0, 3).map((f) => f.name);
+      setSelectedFiles(names);
+    }
+  };
+
+  const removeFile = (index: number) => {
+    setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -59,8 +79,14 @@ export default function ContactForm() {
       concern,
     };
 
+    if (selectedFiles.length > 0) {
+      data.anhänge = selectedFiles.join(", ");
+    }
+
     formData.forEach((value, key) => {
-      data[key] = value.toString();
+      if (typeof value === "string") {
+        data[key] = value;
+      }
     });
 
     try {
@@ -113,7 +139,10 @@ export default function ContactForm() {
               </p>
               <button
                 type="button"
-                onClick={() => setStatus("idle")}
+                onClick={() => {
+                  setStatus("idle");
+                  setSelectedFiles([]);
+                }}
                 className="btn-secondary mt-4"
               >
                 Weitere Anfrage stellen
@@ -216,19 +245,66 @@ export default function ContactForm() {
                 )}
 
                 {concern === "verkauf" && (
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <input
-                      type="text"
-                      name="fahrzeugmodell"
-                      placeholder="Fahrzeugmodell & Erstzulassung"
-                      className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
-                    />
-                    <input
-                      type="text"
-                      name="baujahr"
-                      placeholder="Kilometerstand & Preisvorstellung"
-                      className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
-                    />
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <input
+                        type="text"
+                        name="fahrzeugmodell"
+                        placeholder="Fahrzeugmodell & Erstzulassung (z.B. Audi A4, 2019)"
+                        className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
+                      />
+                      <input
+                        type="text"
+                        name="baujahr"
+                        placeholder="Kilometerstand & Preisvorstellung"
+                        className="rounded-xl border border-white/10 bg-anthracite-900 px-4 py-3.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-accent"
+                      />
+                    </div>
+
+                    {/* Foto-Upload Feld für Ankauf */}
+                    <div className="rounded-xl border border-dashed border-white/15 bg-anthracite-900/50 p-4 text-center">
+                      <input
+                        type="file"
+                        id="car-photos"
+                        ref={fileInputRef}
+                        multiple
+                        accept="image/*"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                      <label
+                        htmlFor="car-photos"
+                        className="cursor-pointer flex flex-col items-center gap-2"
+                      >
+                        <Upload className="h-6 w-6 text-accent-light" />
+                        <span className="text-xs font-semibold text-white">
+                          Fotos vom Fahrzeug / Fahrzeugschein anhängen (optional)
+                        </span>
+                        <span className="text-[11px] text-white/40">
+                          Bis zu 3 Bilder für eine schnellere & präzisere Bewertung
+                        </span>
+                      </label>
+
+                      {selectedFiles.length > 0 && (
+                        <div className="mt-3 flex flex-wrap justify-center gap-2">
+                          {selectedFiles.map((name, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1.5 rounded-lg bg-accent/20 px-2.5 py-1 text-xs text-accent-light"
+                            >
+                              {name}
+                              <button
+                                type="button"
+                                onClick={() => removeFile(i)}
+                                className="hover:text-white"
+                              >
+                                <X className="h-3 w-3" />
+                              </button>
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
 
