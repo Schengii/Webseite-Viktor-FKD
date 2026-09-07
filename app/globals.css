@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0b0d;
+  color: #f4f5f7;
+}
+
+::selection {
+  background-color: #ff6a1a;
+  color: #0a0b0d;
+}
+
+/* Feine Scrollbar im Dark-Theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0b0d;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e333d;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3d4451;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-semibold text-white shadow-glow transition-all duration-200 hover:bg-accent-dark hover:scale-[1.02] active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-6 py-3.5 font-semibold text-white backdrop-blur transition-all duration-200 hover:border-white/30 hover:bg-white/10;
+  }
+  .section-label {
+    @apply mb-3 inline-block rounded-full border border-accent/30 bg-accent/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-accent-light;
+  }
+  .card {
+    @apply rounded-2xl border border-white/10 bg-anthracite-800/60 p-6 shadow-card backdrop-blur transition-all duration-300 hover:border-accent/40 hover:bg-anthracite-800;
+  }
+}
