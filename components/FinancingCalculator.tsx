@@ -7,11 +7,14 @@ export default function FinancingCalculator() {
   const [vehiclePrice, setVehiclePrice] = useState<number>(20000);
   const [downPayment, setDownPayment] = useState<number>(4000);
   const [termMonths, setTermMonths] = useState<number>(48);
-  const interestRate = 4.99; // Effektiver Jahreszins in Prozent
+  // Beispiel-Zinssatz für die Vorabschätzung. Kein beworbenes Angebot einer
+  // konkreten Bank – der tatsächliche Zinssatz hängt von Bonität und
+  // Finanzierungspartner ab und wird erst im persönlichen Angebot genannt.
+  const exampleInterestRate = 5.9;
 
   // Berechnung der monatlichen Rate (Annuitätendarlehen)
   const netLoanAmount = Math.max(0, vehiclePrice - downPayment);
-  const monthlyInterestRate = interestRate / 100 / 12;
+  const monthlyInterestRate = exampleInterestRate / 100 / 12;
   const monthlyRate =
     netLoanAmount > 0
       ? Math.round(
@@ -32,8 +35,9 @@ export default function FinancingCalculator() {
             Wunschfahrzeug flexibel finanzieren
           </h2>
           <p className="mt-4 text-lg text-white/60">
-            Berechnen Sie Ihre individuelle Monatsrate unverbindlich vorab. Faire Konditionen
-            über unsere Partnerbanken – mit oder ohne Anzahlung.
+            Verschaffen Sie sich unverbindlich einen ersten Überblick über eine mögliche Monatsrate.
+            Der tatsächliche Zinssatz hängt von Ihrer Bonität und dem vermittelten Finanzierungspartner
+            ab und wird Ihnen in einem persönlichen Angebot genannt.
           </p>
         </div>
 
@@ -107,13 +111,13 @@ export default function FinancingCalculator() {
                   </label>
                   <span className="text-lg font-bold text-white">{termMonths} Monate</span>
                 </div>
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                   {[24, 36, 48, 60, 72].map((m) => (
                     <button
                       key={m}
                       type="button"
                       onClick={() => setTermMonths(m)}
-                      className={`rounded-xl py-2.5 text-xs font-semibold transition-all ${
+                      className={`whitespace-nowrap rounded-xl py-2.5 text-xs font-semibold transition-all ${
                         termMonths === m
                           ? "bg-accent text-white shadow-glow"
                           : "border border-white/10 bg-anthracite-800 text-white/70 hover:border-white/20 hover:text-white"
@@ -131,10 +135,10 @@ export default function FinancingCalculator() {
               <div>
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
                   <span className="text-xs font-semibold uppercase tracking-wider text-white/50">
-                    Ihre Wunschrate
+                    Beispielrechnung
                   </span>
                   <span className="inline-flex items-center gap-1 rounded-md bg-accent/10 px-2 py-0.5 text-[11px] font-bold text-accent-light">
-                    <Percent className="h-3 w-3" /> ab {interestRate}% eff. p.a.
+                    <Percent className="h-3 w-3" /> Musterzins {exampleInterestRate}% eff. p.a.
                   </span>
                 </div>
 

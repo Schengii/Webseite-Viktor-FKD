@@ -9,3 +9,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vercel
+
+# Von `next dev` automatisch generierte Hinweisdateien für AI-Coding-Agenten (Next.js 16+)
+/AGENTS.md
+/CLAUDE.md

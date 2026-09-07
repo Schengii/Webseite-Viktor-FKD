@@ -43,27 +43,27 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 lg:gap-8 md:flex">
+        <nav className="hidden items-center gap-5 xl:gap-8 lg:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-white/70 transition-colors hover:text-white"
+              className="text-sm font-medium text-white/70 transition-colors hover:text-white whitespace-nowrap"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-4 lg:flex">
           <a
             href={`tel:${COMPANY_CONFIG.phoneRaw}`}
-            className="flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white"
+            className="flex items-center gap-2 text-sm font-medium text-white/70 transition-colors hover:text-white whitespace-nowrap"
           >
-            <Phone className="h-4 w-4 text-accent-light" />
+            <Phone className="h-4 w-4 text-accent-light shrink-0" />
             {COMPANY_CONFIG.phone}
           </a>
-          <Link href="/#anfrage" className="btn-primary !px-5 !py-2.5 text-sm">
+          <Link href="/#anfrage" className="btn-primary !px-5 !py-2.5 text-sm whitespace-nowrap">
             Anfrage starten
           </Link>
         </div>
@@ -72,14 +72,14 @@ export default function Header() {
           type="button"
           aria-label="Menü öffnen"
           onClick={() => setMenuOpen((v) => !v)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-white lg:hidden"
         >
           {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {menuOpen && (
-        <div className="border-t border-white/10 bg-anthracite-950/95 px-4 pb-6 pt-4 backdrop-blur-lg md:hidden">
+        <div className="border-t border-white/10 bg-anthracite-950/95 px-4 pb-6 pt-4 backdrop-blur-lg lg:hidden max-h-[calc(100vh-4rem)] overflow-y-auto">
           <nav className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <Link

@@ -17,14 +17,21 @@ export default function BeforeAfterComparison() {
     setSliderPosition(percentage);
   }, []);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    handleMove(e.touches[0].clientX);
+  // Pointer Events statt getrennter Maus-/Touch-Handler: funktioniert einheitlich
+  // für Maus, Touch und Stift und verhindert per touch-none, dass ein Wischen
+  // über den Slider versehentlich die Seite scrollt statt den Regler zu bewegen.
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setIsDragging(true);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    handleMove(e.clientX);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handlePointerMove = (e: React.PointerEvent) => {
     if (!isDragging) return;
     handleMove(e.clientX);
   };
+
+  const handlePointerUp = () => setIsDragging(false);
 
   return (
     <section className="relative bg-anthracite-950 py-24 sm:py-32">
@@ -35,20 +42,19 @@ export default function BeforeAfterComparison() {
             Vorher & Nachher: Perfektion im Detail
           </h2>
           <p className="mt-4 text-lg text-white/60">
-            Sehen Sie selbst den Unterschied unserer professionellen Lackaufbereitung, Innenraumkur
-            und Keramikversiegelung.
+            Beispielhafte Darstellung der Qualität, die Sie von unserer professionellen
+            Lackaufbereitung, Innenraumkur und Versiegelung erwarten können.
           </p>
         </div>
 
         <div className="mx-auto mt-12 max-w-4xl">
           <div
             ref={containerRef}
-            onMouseDown={() => setIsDragging(true)}
-            onMouseUp={() => setIsDragging(false)}
-            onMouseLeave={() => setIsDragging(false)}
-            onMouseMove={handleMouseMove}
-            onTouchMove={handleTouchMove}
-            className="relative aspect-[16/9] w-full select-none overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-ew-resize"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+            className="relative aspect-[16/9] w-full touch-none select-none overflow-hidden rounded-3xl border border-white/10 shadow-2xl cursor-ew-resize"
           >
             {/* Nachher-Bild (Rechts / Voller Hintergrund) */}
             <Image
@@ -99,10 +105,10 @@ export default function BeforeAfterComparison() {
             </div>
           </div>
 
-          <div className="mt-6 flex items-center justify-between text-xs text-white/50 px-2">
+          <div className="mt-6 flex flex-col gap-2 text-xs text-white/50 px-2 sm:flex-row sm:items-center sm:justify-between">
             <span className="flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-accent-light" />
-              Schieberegler nach links/rechts ziehen zum Vergleichen
+              <Sparkles className="h-4 w-4 text-accent-light shrink-0" />
+              Schieberegler nach links/rechts ziehen zum Vergleichen (Beispielbilder)
             </span>
             <a href="#anfrage" className="text-accent-light hover:underline">
               Aufbereitungstermin anfragen →

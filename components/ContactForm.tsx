@@ -46,20 +46,33 @@ const CONCERNS: ConcernOption[] = [
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
+const MAX_FILES = 3;
+const MAX_FILE_SIZE_MB = 5;
+
 export default function ContactForm() {
   const [concern, setConcern] = useState<Concern>("suche");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const filesArr = Array.from(e.target.files);
-      // Dateinamen speichern
-      const names = filesArr.slice(0, 3).map((f) => f.name);
-      setSelectedFiles(names);
+    if (!e.target.files) return;
+    const filesArr = Array.from(e.target.files);
+
+    const tooLarge = filesArr.find((f) => f.size > MAX_FILE_SIZE_MB * 1024 * 1024);
+    if (tooLarge) {
+      setErrorMessage(
+        `„${tooLarge.name}“ ist größer als ${MAX_FILE_SIZE_MB} MB. Bitte wählen Sie ein kleineres Bild.`
+      );
+      setStatus("error");
+      e.target.value = "";
+      return;
     }
+
+    setErrorMessage("");
+    if (status === "error") setStatus("idle");
+    setSelectedFiles(filesArr.slice(0, MAX_FILES));
   };
 
   const removeFile = (index: number) => {
@@ -74,34 +87,23 @@ export default function ContactForm() {
     setStatus("submitting");
     setErrorMessage("");
 
+    // FormData statt JSON, damit die tatsächlichen Bilddateien mitgeschickt
+    // werden können (nicht nur ihre Dateinamen).
     const formData = new FormData(event.currentTarget);
-    const data: Record<string, string> = {
-      concern,
-    };
-
-    if (selectedFiles.length > 0) {
-      data.anhänge = selectedFiles.join(", ");
-    }
-
-    formData.forEach((value, key) => {
-      if (typeof value === "string") {
-        data[key] = value;
-      }
-    });
+    formData.set("concern", concern);
+    selectedFiles.forEach((file) => formData.append("photos", file));
 
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
 
       const result = await response.json();
 
       if (response.ok && result.success) {
         setStatus("success");
+        setSelectedFiles([]);
       } else {
         setErrorMessage(result.error || "Etwas ist schiefgelaufen. Bitte rufen Sie uns direkt an.");
         setStatus("error");
@@ -287,16 +289,17 @@ export default function ContactForm() {
 
                       {selectedFiles.length > 0 && (
                         <div className="mt-3 flex flex-wrap justify-center gap-2">
-                          {selectedFiles.map((name, i) => (
+                          {selectedFiles.map((file, i) => (
                             <span
-                              key={i}
-                              className="inline-flex items-center gap-1.5 rounded-lg bg-accent/20 px-2.5 py-1 text-xs text-accent-light"
+                              key={`${file.name}-${i}`}
+                              className="inline-flex items-center gap-1.5 rounded-lg bg-accent/20 px-2.5 py-1 text-xs text-accent-light max-w-[180px]"
                             >
-                              {name}
+                              <span className="truncate">{file.name}</span>
                               <button
                                 type="button"
                                 onClick={() => removeFile(i)}
-                                className="hover:text-white"
+                                className="shrink-0 hover:text-white"
+                                aria-label={`${file.name} entfernen`}
                               >
                                 <X className="h-3 w-3" />
                               </button>
