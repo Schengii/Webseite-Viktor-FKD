@@ -69,7 +69,7 @@ export default function QualityGuarantees() {
           <div className="relative lg:col-span-5">
             <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl">
               <Image
-                src="https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=1200&q=80"
+                src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80"
                 alt="FKD Meister-Werkstatt und Fahrzeugkontrolle"
                 fill
                 sizes="(max-width: 1024px) 100vw, 500px"
