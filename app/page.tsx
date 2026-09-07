@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import VehicleInventory from "@/components/VehicleInventory";
+import QualityGuarantees from "@/components/QualityGuarantees";
 import FinancingCalculator from "@/components/FinancingCalculator";
 import WhyUs from "@/components/WhyUs";
 import BeforeAfterComparison from "@/components/BeforeAfterComparison";
@@ -22,6 +23,7 @@ export default function Home() {
         <Hero />
         <Services />
         <VehicleInventory />
+        <QualityGuarantees />
         <FinancingCalculator />
         <WhyUs />
         <BeforeAfterComparison />

@@ -16,53 +16,58 @@ Moderne, hochperformante und conversion-optimierte Webanwendung für **FKD Fahrz
 
 ## 🚀 Neu implementierte Features & Optimierungen
 
-### 1. DSGVO Cookie-Consent-Banner (`CookieBanner.tsx`)
+### 1. Qualitäts- & Garantieversprechen (`QualityGuarantees.tsx`)
+- 4-Punkte Vertrauenssiegel: 100-Punkte-Check, 12 Monate Gebrauchtwagengarantie, Meister-Werkstattservice und zertifiziertes Detailing.
+- Direkte Hervorhebung des persönlichen Meister-Kontakts ohne Callcenter-Umwege.
+
+### 2. Deployment-Sicherheit & Vercel-Konfiguration (`vercel.json`)
+- Vordefinierte Sicherheits-Header (`X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection`, `Referrer-Policy`) für optimalen Schutz vor Clickjacking und XSS.
+
+### 3. DSGVO Cookie-Consent-Banner (`CookieBanner.tsx`)
 - Dezentes, modernes Cookie-Banner mit Auswahlmöglichkeit („Alle akzeptieren“, „Nur Notwendige“) und direkter Datenschutzerklärung-Verlinkung.
 - Status wird sicher im `localStorage` gespeichert.
 
-### 2. Scroll-to-Top Navigation (`ScrollToTop.tsx`)
+### 4. Scroll-to-Top Navigation (`ScrollToTop.tsx`)
 - Schwebender Button, der nach 400px Scrolltiefe sanft einblendet und Besuchern ein bequemes Zurückspringen an den Seitenanfang ermöglicht.
 
-### 3. PWA Web App Manifest & SVG Favicon (`app/manifest.json`, `app/icon.svg`)
+### 5. PWA Web App Manifest & SVG Favicon (`app/manifest.json`, `app/icon.svg`)
 - Vollständige PWA-Konfiguration für Startbildschirm-Installation auf Smartphones (iOS / Android) sowie gebrandetes SVG Favicon.
 
-### 4. Interaktiver Finanzierungsrechner (`FinancingCalculator.tsx`)
+### 6. Interaktiver Finanzierungsrechner (`FinancingCalculator.tsx`)
 - Dynamischer Rechner mit Live-Berechnung für Annuitätendarlehen.
 - Schieberegler für **Fahrzeugpreis (5.000 € – 80.000 €)**, **Anzahlung** und Buttons für **Laufzeit (24 – 72 Monate)**.
 - Sofortige Berechnung der monatlichen Wunschrate und Nettodarlehensbetrag mit Übergabe zur Kreditanfrage.
 
-### 5. Standortkarte & Anfahrtsbeschreibung (`LocationMap.tsx`)
+### 7. Standortkarte & Anfahrtsbeschreibung (`LocationMap.tsx`)
 - DSGVO-konforme interaktive **OpenStreetMap-Karte** ohne Third-Party Tracking-Cookies.
 - Direkter Routenplaner-Button für Google Maps sowie vollständige Auflistung aller Kontaktdaten & Öffnungszeiten.
 
-### 6. Zentrale Stammdatenverwaltung (`config/company.ts`)
+### 8. Zentrale Stammdatenverwaltung (`config/company.ts`)
 - Sämtliche Unternehmensdaten (Inhaber, Anschrift, Rufnummern, E-Mail, Öffnungszeiten, Steuer-ID) zentral gebündelt.
 - Wird automatisch und konsistent in Header, Footer, Impressum, Datenschutz, Standortkarte, WhatsApp-Button und SEO-Tags verwendet.
 
-### 7. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
+### 9. Showroom & Fahrzeugbestand (`VehicleInventory.tsx`)
 - Interaktiver Fahrzeugbestand mit Live-Filter (Top-Angebote, Diesel, Benzin).
 - Detaillierte Fahrzeugkarten mit technischen Daten (Kilometerstand, Erstzulassung, Kraftstoff, Leistung, Preis).
 - Schnellanfrage-CTA für jedes Fahrzeug sowie externe Verlinkung zu Mobile.de & AutoScout24.
 
-### 8. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
+### 10. Vorher-/Nachher-Vergleich (`BeforeAfterComparison.tsx`)
 - Interaktiver Schieberegler (Slider) mit Touch- & Maussteuerung für Fahrzeugaufbereitung & Lackpolitur.
 - Direkte visuelle Demonstration der Aufbereitungsqualität zur Steigerung von Werkstatt- und Pflegebuchungen.
 
-### 9. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
+### 11. Foto-Upload im Ankauf-Formular (`ContactForm.tsx`)
 - Beim Auswählen von **"Verkauf / Vermittlung"** können Kunden nun bis zu 3 Fotos ihres Fahrzeugs oder des Fahrzeugscheins anhängen.
 - Ermöglicht eine deutlich schnellere und präzisere Vorabbewertung für Viktor.
 
-### 10. Rechtssicherheit & Compliance
+### 12. Rechtssicherheit & Compliance
 - **Rechtskonformes Impressum:** Unter `/impressum` gemäß § 5 DDG mit allen Pflichtangaben, Kontakt und Streitschlichtungshinweis.
 - **Datenschutzerklärung (DSGVO):** Unter `/datenschutz` mit Hinweisen zur Datenerfassung, Kontaktformularen, Server-Logs und Betroffenenrechten.
 
-### 11. Lead-Generierung & Sofortkontakt
-- **Voll funktionsfähige API-Route (`/api/contact`):**
-  - Echte serverseitige Verarbeitung mit Datenvalidierung und Resend / E-Mail-Vorbereitung.
-- **WhatsApp Quick-Chat (`WhatsAppButton.tsx`):**
-  - Schwebender Floating-Button für sofortige Kundenkontakte über Smartphone oder Web-WhatsApp mit vordefinierter Nachricht.
+### 13. Lead-Generierung & Sofortkontakt
+- **Voll funktionsfähige API-Route (`/api/contact`):** Echte serverseitige Verarbeitung mit Datenvalidierung und Resend / E-Mail-Vorbereitung.
+- **WhatsApp Quick-Chat (`WhatsAppButton.tsx`):** Schwebender Floating-Button für sofortige Kundenkontakte über Smartphone oder Web-WhatsApp mit vordefinierter Nachricht.
 
-### 12. Technisches & Lokales SEO
+### 14. Technisches & Lokales SEO
 - **Schema.org Structured Data (`layout.tsx`):** JSON-LD Rich Snippet für `AutoDealer` & `AutoRepair` (Bonn, Rhein-Sieg-Kreis).
 - **OpenGraph & Twitter Cards:** Optimierte Meta-Tags für soziale Netzwerke und Messenger.
 - **`sitemap.ts` & `robots.ts`:** Automatische Generierung von Sitemap und Crawler-Direktiven.
